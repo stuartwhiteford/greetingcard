@@ -34,28 +34,15 @@ jobs:
       - name: Decode BASEURL
         env:
           APIKEY: ${{ secrets.API_KEY_GH }}
-        run: echo YOUR_API_KEY="$APIKEY" > ./local.properties
+        run: echo apiKey="$APIKEY" > ./local.properties
 
       - name: Build debug app
         run: ./gradlew app:assembleDebug
 
-      - name: Create Release
+      - name: Create release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: true
-          prerelease: false
+          artifacts: "*.apk"
 
-      - name: Upload app
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/debug/app-debug.apk
-          asset_name: app-debug.apk
-          asset_content_type: application/vnd.android.package-archive
+
