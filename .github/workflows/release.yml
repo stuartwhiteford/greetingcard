@@ -36,8 +36,8 @@ jobs:
           APIKEY: ${{ secrets.API_KEY_GH }}
         run: echo YOUR_API_KEY="$APIKEY" > ./local.properties
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Build debug app
+        run: ./gradlew app:assembleDebug
 
       - name: Create Release
         id: create_release
@@ -56,6 +56,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/demo/release/app-demo-release.apk
-          asset_name: app-demo-release.apk
+          asset_path: app/build/app/outputs/apk/debug/app-debug.apk
+          asset_name: app-debug.apk
           asset_content_type: application/vnd.android.package-archive
