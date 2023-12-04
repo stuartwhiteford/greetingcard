@@ -1,4 +1,4 @@
-name: Android CI
+name: Test versioning
 
 on:
   push:
@@ -22,5 +22,5 @@ jobs:
           fetch-depth: 0
       - name: 'Export environment variables'
         run: |
-          echo "::set-env name=VERSION_NAME::$(cat app/build/outputs/app_versioning/prodRelease/version_name.txt)"
-          echo "::set-env name=VERSION_CODE::$(cat app/build/outputs/app_versioning/prodRelease/version_code.txt)"
+          echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/prodRelease/version_name.txt)"
+          echo "VERSION_CODE=$(cat app/build/outputs/app_versioning/prodRelease/version_code.txt)"
