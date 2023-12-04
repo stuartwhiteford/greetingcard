@@ -2,8 +2,9 @@ name: GitHub Release with APKs
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [ "release" ]
+  pull_request:
+    branches: [ "release" ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
