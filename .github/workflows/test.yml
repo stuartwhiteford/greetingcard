@@ -18,11 +18,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: 'Get Previous tag'
-        id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
         with:
-          fallback: 1.0.0 # Optional fallback tag to use when no tag can be found
-      - name: Test
+          fetch-depth: 0
+      - name: 'Export environment variables'
         run: |
-          echo ${{ steps.previoustag.outputs.tag }}
+          echo "::set-env name=VERSION_NAME::$(cat app/build/outputs/app_versioning/prodRelease/version_name.txt)"
+          echo "::set-env name=VERSION_CODE::$(cat app/build/outputs/app_versioning/prodRelease/version_code.txt)"
