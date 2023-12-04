@@ -46,5 +46,5 @@ jobs:
 
       - name: 'Export environment variables'
         run: |
-          echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/prodRelease/version_name.txt)"
-          echo "VERSION_CODE=$(cat app/build/outputs/app_versioning/prodRelease/version_code.txt)"
+          echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/debug/version_name.txt)"
+          echo "VERSION_CODE=$(cat app/build/outputs/app_versioning/debug/version_code.txt)"
